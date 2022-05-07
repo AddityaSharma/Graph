@@ -97,7 +97,7 @@ void prims_Algorithm(vector<pair<int, int> adj[], int N){
       	mstSet[u] = true; 
 
       	for(auto it : adj[u]) {
-          	int v = it.first;
+        	int v = it.first;
           	int weight = it.second;
           	if (!mstSet[v] && weight < key[v]){ // make sure while traversing the adjacent nodes, we will not take in account the nodes which are already in the MST.
               	parent[v] = u;
