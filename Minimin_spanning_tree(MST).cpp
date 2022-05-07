@@ -119,7 +119,7 @@ void prims_Algorithm(vector<pair<int, int> adj[], int N){
 // --> one way is to traverse the edges we have marked that will be in our MST.
 // --> another way is to add the cost of the edges when we mark an edge to be in the MST. - (code below)
 int prims_algorithm(int V, vector<vector<int>> adj[]){
-	vector<int> parent(V, -1);
+    vector<int> parent(V, -1);
     vector<int> key(V, INT_MAX);
     vector<int> mstSet(V, 0);
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
