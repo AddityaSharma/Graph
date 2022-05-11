@@ -2,8 +2,8 @@
 
 /*
 intution : we are calling dfs for node u which further calls dfs for its adjacent nodes v; now first dfs call for node v will get completed and we put node v in stack 
-and then, the dfs call for node u will get over, and we will put that in our stack. -> so we are actually dfs in such a fashion that for an edge from u to v, first 
-node v goes into the stack then node u goes into to stack and hence our required linear ordering of the nodes take place.
+and then, the dfs call for node u will get over, and we will put that in our stack. -> so we are actually calling dfs in such a fashion that for an edge from u to v, 
+first node v goes into the stack then node u goes into to stack and hence our required linear ordering of the nodes take place.
 */    
 void dfs(int node, vector<int> &visited, stack<int> &st, vector<int> adj[]){
     visited[node] = 1;
