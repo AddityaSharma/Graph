@@ -19,7 +19,7 @@ bool comp(node a, node b) {
 // Disjoint Set implementation: -> we require a rank and parent vector for DSU.
 int findPar(int u, vector<int> &parent) {
     if(u == parent[u]) return u; 
-    return parent[u] = findPar(parent[u], parent); 
+    return parent[u] = findPar(parent[u], parent); // path compression.
 }
 
 void unionn(int u, int v, vector<int> &parent, vector<int> &rank) {
@@ -36,6 +36,7 @@ void unionn(int u, int v, vector<int> &parent, vector<int> &rank) {
 
 int main(){
     // taking a graph as input directly in a vector named 'edges'.
+    // driver code:
 	int N=5,m=6;
 	vector<node> edges; 
 	edges.push_back(node(0,1,2));
@@ -56,8 +57,7 @@ int main(){
 	
   // creating rank and parent vectors for Disjoint set implementation.
 	vector<int> parent(N);
-	for(int i = 0;i<N;i++) 
-	    parent[i] = i; 
+	for(int i = 0; i < N; i++) parent[i] = i; 
 	vector<int> rank(N, 0); 
 	
   // traversing the 'edges' vector and finding which edge will be taken in account for our MST.
@@ -66,7 +66,7 @@ int main(){
 	for(auto it : edges) {
 	    if(findPar(it.v, parent) != findPar(it.u, parent)) {
 	        cost += it.wt; 
-	        mst.push_back({it.u, it.v}); 
+	        mst.push_back({it.u, it.v}); // storing the edges that we have considered.
 	        unionn(it.u, it.v, parent, rank); 
 	    }
 	}
