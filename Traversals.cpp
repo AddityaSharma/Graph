@@ -1,8 +1,8 @@
 // BFS:
 void bfs_traversal(int node, vector<int> adj[], vector<int> &visited, vector<int> &traversal){
     queue<int> q;
-    q.push(i);
-    visited[i] = 1;
+    q.push(node);
+    visited[node] = 1;
     
     while(!q.empty()){
         int u = q.front();
@@ -14,8 +14,7 @@ void bfs_traversal(int node, vector<int> adj[], vector<int> &visited, vector<int
                 q.push(x);
             }
         }
-    }
-    
+    }  
 }
 vector<int> bfs(int V, vector<int> adj[]) {
     vector<int> traversal; // used to store the bfs traversal
