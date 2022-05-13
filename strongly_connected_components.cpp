@@ -25,6 +25,9 @@ void revDfs(int node, vector<int> &vis, vector<int> transpose[]) {
 
 void kosaraju_algorithm(int V, vector<int> adj[]){
     // Find Topological ordering of the vertices of Graph:
+    // here we are just using the topological sort to get the order of vertices w.r.t their finish time, there may be
+    // instances where we will have cycles in our graph and the concept of toposort is actually not viable there, but
+    // at that instance too, we get our required ordering of vertices w.r.t the finish time.
     stack<int> st;
     vector<int> vis(n, 0); 
     for(int i = 0; i < n; i++) {
