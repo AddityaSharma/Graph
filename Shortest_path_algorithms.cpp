@@ -116,3 +116,75 @@ void dijkstra_Algorithm(vector<pair<int, int>> adj[], int N, int src){
 	cout << "The distances from source " << src << " are : \n";
 	for(int i = 1 ; i<=n ; i++)	cout << distTo[i] << " ";
 }
+
+
+// Shortest Path Algorithm for Graphs with negative weight edges - Bellman Ford Algorithm: - T.C : O(VE) | S.C : O(V)
+
+// Bellman Ford Algorithm only works for Directed Acyclic Graphs, if we want to apply this algorithm on undirected graph
+// then we have to replace each undirected edge by a pair of directed edges. Also there should not be negative cycles in
+// graph
+// Bellman Ford algorithm helps us to find negative weight cycles in the graph, if any.
+struct node {
+    int u;
+    int v;
+    int wt; 
+    node(int first, int second, int weight) {
+        u = first;
+        v = second;
+        wt = weight;
+    }
+};
+
+int main(){
+    int N, m;
+    cin >> N >> m;
+    vector<node> edges; 
+    for(int i = 0; i < m; i++) {
+        int u, v, wt;
+        cin >> u >> v >> wt; 
+        edges.push_back(node(u, v, wt)); 
+    }
+
+    int src;
+    cin >> src; 
+	
+    // Main logic of Bellman Ford Algorithm:
+    int inf = 1e8; 
+    vector<int> dist(N, inf); 
+
+    dist[src] = 0; 
+
+    // relaxing all edges (N-1) times:
+    for(int i = 1; i <= N-1; i++) {
+        for(auto it : edges) {
+            if(dist[it.u] + it.wt < dist[it.v]) {
+                dist[it.v] = dist[it.u] + it.wt; 
+            }
+        }
+    }
+
+    /*
+    // check for negative cycle in graph
+    int flag = 0; 
+    for(auto it: edges) {
+        if(dist[it.u] + it.wt < dist[it.v]) { 
+            flag = 1; 
+            break; 
+        }
+    }
+
+    if(flag) {
+        "Negative cycle detected";
+        return 0;
+    }
+    */
+
+    // printing out the shortest distances for each vertex from given source:
+    if(!flag) {
+        for(int i = 0; i < N; i++) {
+            cout << i << " " << dist[i] << endl;
+        }
+    }
+
+    return 0;
+}
