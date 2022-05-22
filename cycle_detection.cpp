@@ -86,6 +86,46 @@ bool isCyclic(int V, vector<int> adj[]) {
     return 0;
 }
 
+bool DFSRec(int node, vector<bool> &visited, vector<bool> &rec_st, vector<vector<int>> &adj, vector<bool> &present_in_cycle){
+    visited[node] = true;
+    rec_st[node] = true;
+    
+    /* present_in_cycle[node] = 1; -> mark the current node as a part of cycle */
+    for(auto it : adj[node]){
+        if(!visited[it]){
+            if(DFSRec(it, visited, rec_st, adj, present_in_cycle)){
+                return present_in_cycle[node] = true;   
+            }
+        }
+        else if(visited[it] && rec_st[it]){
+            return present_in_cycle[node] = true;
+        }
+    }
+    
+    rec_st[node] = false; // backtracking step
+    return false;
+}
+
+vector<int> nodes_in_cycle(vector<vector<int>>& graph) {
+    vector<int> ans;
+    
+    int V = graph.size();
+    vector<bool> present_in_cycle(V, 0); // tracks the nodes that are there in any of the cycle.
+    vector<bool> visited(V, 0);
+    vector<bool> rec_st(V, 0); // tracks the nodes that are visited by the current DFS call.
+    for(int i = 0; i < V; i++){
+        if(!visited[i]){
+            DFSRec(i, visited, rec_st, graph, present_in_cycle);
+        }
+    }
+    
+    // the index for which present_in_cycle[i] = 1, means the ith node is part of some cycle
+    for(int i = 0; i < V; i++) if(present_in_cycle[i]) ans.push_back(i);
+    
+    return ans;
+}
+
+
 // --> Using Breadth First Search(BFS) : kahn's Algorithm
 void BFS(vector<int> adj[], int &cnt, queue<int> &q, vector<int> &inDegree){
     while(!q.empty()){
