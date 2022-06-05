@@ -104,8 +104,8 @@ void dijkstra_Algorithm(vector<pair<int, int>> adj[], int N, int src){
     	pq.pop();
     
     	for(auto it : adj[curr_node]){
-    		int next_node = it->first;
-    		int next_node_dist = it->second;
+    		int next_node = it.first;
+    		int next_node_dist = it.second;
     		if(distTo[next_node] > next_node_dist + next_node_dist){
     			distTo[next_node] = next_node_dist + next_node_dist;
     			pq.push(make_pair(next_node_dist, next_node));
