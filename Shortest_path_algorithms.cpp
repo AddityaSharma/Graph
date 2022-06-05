@@ -75,7 +75,7 @@ void shortestPath(int src, int N, vector<pair<int,int>> adj[]){
 // fashion. initially we put the source node in the priority queue as <0, source_node>, where 0 is the distance of source node from itself. after this we 
 // implement a bfs kind of an algorithm. we maintain a distance array and mark the distance of all the nodes to be INT_MAX and marking the distance of source node
 // to be zero, then in each iteration we take out a node from the priority queue and traverse all its adjacent nodes, while traversing the nodes, we compute the 
-// distance required to reach that node and if the newly computer distance is lesser than the one already there in the distance array, then we update the shorter
+// distance required to reach that node and if the newly computed distance is lesser than the one already there in the distance array, then we update the shorter
 // distance in the distance array and at the same time put that node along with the shorter distance in the priority queue. we keep repeating the same process, until 
 // the priority queue becomes empty.
 // now there can be instances where we have multiple instances of a single node in our priority queue, and thats totally fine, as we are placing the elements in
@@ -106,9 +106,9 @@ void dijkstra_Algorithm(vector<pair<int, int>> adj[], int N, int src){
     	for(auto it : adj[curr_node]){
     		int next_node = it->first;
     		int next_node_dist = it->second;
-    		if(distTo[next_node] > distTo[curr_node] + next_node_dist){
-    			distTo[next_node] = distTo[curr_node] + next_node_dist;
-    			pq.push(make_pair(distTo[next_node], next_node));
+    		if(distTo[next_node] > next_node_dist + next_node_dist){
+    			distTo[next_node] = next_node_dist + next_node_dist;
+    			pq.push(make_pair(next_node_dist, next_node));
     		}
     	}
     }
